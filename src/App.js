@@ -23,19 +23,21 @@ export default class App extends Component {
   render() {
     return (
       <>
-        {
-          this.state.mostrarForm 
-            ?   
-              <Formulario
-                guardarForm={this.guardarForm}
-                setScreen={this.setScreen}
-              />
-            :
-              <Listado
-                formulario={this.state.formulario}
-                setScreen={this.setScreen}
-              />
-        }
+        <div className="py-3">
+          {
+            this.state.mostrarForm 
+              ?   
+                <Formulario
+                  guardarForm={this.guardarForm}
+                  setScreen={this.setScreen}
+                />
+              :
+                <Listado
+                  formulario={this.state.formulario}
+                  setScreen={this.setScreen}
+                />
+          }
+        </div>
       </>
     );
   }

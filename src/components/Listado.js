@@ -10,7 +10,10 @@ export default class Listado extends Component {
 			<>
         <h1 className="text-center">LISTADO</h1>
 				<div className="d-flex flex-wrap flex-row justify-content-around">
-					{
+					{formulario.length === 0 ?
+						<h3>-- No hay información -- </h3>
+					:
+					(
 						formulario &&
 							formulario.map((form, index) => (
 								<Persona
@@ -18,7 +21,7 @@ export default class Listado extends Component {
 									form={form}
 								/>
 							))
-					}
+					)}
 				</div>
 				<div className="text-center">
 					<button type="button" onClick={setScreen} className="btn btn-primary m-auto">Ir a Formulario</button>
