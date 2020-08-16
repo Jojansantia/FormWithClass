@@ -13,14 +13,23 @@ export default class App extends Component {
   guardarForm = (newForm) => {
     let formulario = this.state.formulario
     formulario.push(newForm)
-    this.setState({...this.state, formulario})
+    // this.setState({...this.state, formulario})
+    localStorage.setItem('data', JSON.stringify(formulario));  
   } 
+
+  componentDidMount () {
+    let formulario = JSON.parse(localStorage.getItem('data'));
+    if(formulario){
+      this.setState({...this.state, formulario})
+    }
+  }
 
   setScreen = () => {
     let mostrarForm = !this.state.mostrarForm
     this.setState({...this.state, mostrarForm })
   }
   render() {
+console.log(this.state.formulario);
     return (
       <>
         <div className="py-3">
