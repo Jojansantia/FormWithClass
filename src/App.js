@@ -7,7 +7,7 @@ export default class App extends Component {
   
   state = {
     formulario: [],
-    mostrarForm: false
+    mostrarForm: true
   };
 
   guardarForm = (newForm) => {
@@ -29,10 +29,9 @@ export default class App extends Component {
     this.setState({...this.state, mostrarForm })
   }
   render() {
-console.log(this.state.formulario);
     return (
       <>
-        <div className="py-3">
+        <div className="py-2">
           {
             this.state.mostrarForm 
               ?   

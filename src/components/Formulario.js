@@ -89,8 +89,11 @@ export default class Formulario extends Component {
   }
 
 		return (
-			<div className="container rounded-lg shadow w-50 border pb-2">
-        <h1 className="text-center">FORMULARIO</h1>
+			<div className="container rounded-lg shadow col-md-7 col-sm-9 col-11 border pb-2">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <h1 className="text-center ">FORMULARIO</h1>
+          <button type="button" onClick={setScreen} className="btn btn-info">Ver Listado</button>
+        </div>
         <form onSubmit={setForm}>
           {alert &&
             <div className="alert alert-danger" role="alert">
@@ -139,7 +142,7 @@ export default class Formulario extends Component {
             <label className="form-check-label" forhtml="exampleCheck1">Acepto los términos y condiciones</label>
           </div>
           <div className="text-center">
-            <button type="submit" className="btn btn-primary w-25">Submit</button></div>
+            <button type="submit" className="btn btn-success w-25">Submit</button></div>
         </form>
       </div>
 		)

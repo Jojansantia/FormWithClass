@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Persona from './Persona'
+import Datos from './Datos'
 
 export default class Listado extends Component {
 
@@ -16,7 +16,7 @@ export default class Listado extends Component {
 					(
 						formulario &&
 							formulario.map((form, index) => (
-								<Persona
+								<Datos
 									key={index}
 									form={form}
 								/>
@@ -24,7 +24,7 @@ export default class Listado extends Component {
 					)}
 				</div>
 				<div className="text-center">
-					<button type="button" onClick={setScreen} className="btn btn-primary m-auto">Ir a Formulario</button>
+					<button type="button" onClick={setScreen} className="btn btn-info w-25">Ir a Formulario</button>
 				</div>
 			</>
 		)

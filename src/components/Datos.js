@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Persona extends Component {
+export default class Datos extends Component {
 	render() {
 		const {form} = this.props
 		const {email, age, techs, descripcion } = form
