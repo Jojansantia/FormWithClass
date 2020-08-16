@@ -6,15 +6,15 @@ export default class Formulario extends Component {
     email: '',
     age: 0,
     select: '',
-    techs: ["React"],
+    techs: [],
     descripcion: '',
     check: false,
-    errormessage: '',
+    alert: '',
   }   
 
 	render() {
-    const { guardarForm } = this.props
-    const {email, age, select, techs, descripcion, check, errormessage } = this.state
+    const { guardarForm, setScreen } = this.props
+    const {email, age, select, techs, descripcion, check, alert } = this.state
 
     const setChecked = check => {
       this.setState({...this.state, check})
@@ -22,42 +22,82 @@ export default class Formulario extends Component {
 
     const  setForm = (event) => {
       event.preventDefault()
-      guardarForm(this.state)
-    }
 
-  const myChangeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    let err = '';
-
-    if (nam === "age") {
-      let newval = parseInt(val)
-      if (val !=="" && !Number(val)) {
-        err = <strong>Your age must be a number</strong>;
-        this.setState({errormessage: err});
+      if(email.trim() === '' &&
+        age === 0  &&
+        select.trim() === '' &&
+        techs.length === 0 &&
+        descripcion.trim() === '' 
+      ){
+        setAlert('Todos los campos son obligatorios.')
         return;
       }
-      this.setState({[nam]: newval});
-      this.setState({errormessage: err});
-
-    }else if(nam === 'techs'){
-        val = Array.from(
-        event.target.selectedOptions,
-        (option) => option.value
-      )
-      this.setState({[nam]: val});
-
-    }else{
-      this.setState({[nam]: val});
-
+      if(email.trim() === ''){
+        setAlert('El email es obligatorio.')
+        return;
+      }
+      if(age === 0){
+        setAlert('La edad es obligatoria.')
+        return;
+      }
+      if(select.trim() === ''){
+        setAlert('Escoja un ejemplo prueba.')
+        return;
+      }
+      if(techs.length === 0){
+        setAlert('Escoja una o varias tecnologías..')
+        return;
+      }
+      if(descripcion.trim() === ''){
+        setAlert('La descripción es obligatoria.')
+        return;
+      }
+      if(check){
+        guardarForm(this.state) 
+        setScreen()
+      }else{
+        setAlert('Debe aceptar los términos y condiciones.')
+      }
     }
+
+    const myChangeHandler = (event) => {
+      let nam = event.target.name;
+      let val = event.target.value;
+
+      if (nam === "age") {
+        let newval = parseInt(val)
+        if (val !=="" && !Number(val)) {
+          return;
+        }
+        this.setState({[nam]: newval});
+      }else if(nam === 'techs'){
+          val = Array.from(
+          event.target.selectedOptions,
+          (option) => option.value
+        )
+        this.setState({[nam]: val});
+      }else{
+        this.setState({[nam]: val});
+      }
+    }
+
+  const setAlert = (alert) => {
+    this.setState({alert});
+    setTimeout(() => {
+      this.setState({alert: ''});
+    }, 2000);
   }
 
 		return (
 			<div className="container m-auto">
         <h1 className="text-center">FORMULARIO</h1>
         <form onSubmit={setForm}>
-          {errormessage}
+         
+          {alert &&
+            <div className="alert alert-danger" role="alert">
+              ¡Error! {alert}
+           </div>
+          }
           <div className="form-group">
             <label forhtml="exampleFormControlInput1">Email address</label>
             <input type="email" value={email} onChange={myChangeHandler} name="email" className="form-control" id="exampleFormControlInput1" placeholder="name@examplecom"/>
@@ -97,7 +137,7 @@ export default class Formulario extends Component {
 
           <div className="form-group form-check">
             <input type="checkbox" name="check"  checked={check} onChange={() => setChecked(!check)} className="form-check-input" id="exampleCheck1"/>
-            <label className="form-check-label" forhtml="exampleCheck1">Check me out</label>
+            <label className="form-check-label" forhtml="exampleCheck1">Acepto los términos y condiciones</label>
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>

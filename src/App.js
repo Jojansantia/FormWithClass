@@ -6,24 +6,36 @@ import Listado from './components/Listado'
 export default class App extends Component {
   
   state = {
-    formulario: []
+    formulario: [],
+    mostrarForm: false
   };
 
   guardarForm = (newForm) => {
     let formulario = this.state.formulario
     formulario.push(newForm)
-    this.setState({formulario})
+    this.setState({...this.state, formulario})
   } 
+
+  setScreen = () => {
+    let mostrarForm = !this.state.mostrarForm
+    this.setState({...this.state, mostrarForm })
+  }
   render() {
     return (
       <>
-        <Formulario
-          guardarForm={this.guardarForm}
-          
-        />
-        <Listado
-          formulario={this.state.formulario}
-        />
+        {
+          this.state.mostrarForm 
+            ?   
+              <Formulario
+                guardarForm={this.guardarForm}
+                setScreen={this.setScreen}
+              />
+            :
+              <Listado
+                formulario={this.state.formulario}
+                setScreen={this.setScreen}
+              />
+        }
       </>
     );
   }
