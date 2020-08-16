@@ -7,26 +7,39 @@ export default class App extends Component {
   
   state = {
     formulario: [],
-    mostrarForm: true
+    mostrarForm: false,
+    loading: false
   };
 
   guardarForm = (newForm) => {
     let formulario = this.state.formulario
     formulario.push(newForm)
-    // this.setState({...this.state, formulario})
+    // this.setState({formulario})
     localStorage.setItem('data', JSON.stringify(formulario));  
   } 
 
   componentDidMount () {
+    this.fetchData()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.userId !== this.props.userId) {
+      this.fetchData()
+    }
+  }
+
+  fetchData = () => {
+    this.setState({loading: true})
+
     let formulario = JSON.parse(localStorage.getItem('data'));
     if(formulario){
-      this.setState({...this.state, formulario})
+      this.setState({formulario, loading: false})
     }
   }
 
   setScreen = () => {
     let mostrarForm = !this.state.mostrarForm
-    this.setState({...this.state, mostrarForm })
+    this.setState({mostrarForm })
   }
   render() {
     return (
