@@ -13,7 +13,6 @@ export default class App extends Component {
   };
 
   guardarForm = (newForm) => {
-console.log("dasd");
     this.setState(state => ({
       formulario: [
         ...state.formulario,
@@ -36,9 +35,7 @@ console.log("dasd");
   }
 
   componentDidUpdate (prevProps, prevState) {
-    let lenght1 = prevState.formulario.length
-    let lenght2 = this.state.formulario.length
-    if(lenght1 !== lenght2){
+    if(prevState.formulario !== this.state.formulario){
       localStorage.setItem('data', JSON.stringify(this.state.formulario));
     } 
   }
@@ -62,7 +59,6 @@ console.log("dasd");
   }
 
   render() {
-console.log(this.state.formulario);
     return (
       <>
         <div className="py-2">

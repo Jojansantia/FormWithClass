@@ -78,7 +78,7 @@ export default class Formulario extends Component {
     
 		return (
 			<div className="container rounded-lg shadow col-md-7 col-sm-9 col-11 border pb-2">
-        <div className="d-flex justify-content-between align-items-center mb-2">
+        <div className="d-flex justify-content-between align-items-center mt-1 mb-2">
           <h1 className="text-center ">FORMULARIO</h1>
           <button type="button" onClick={this.handleClick} className="btn btn-info">Ver Listado</button>
         </div>
