@@ -4,7 +4,7 @@ import Datos from './Datos'
 export default class Listado extends Component {
 
 	render() {
-		const {formulario, setScreen} = this.props
+		const {formulario, setScreen , onRemove, onEdit} = this.props
 
 		return (
 			<>
@@ -18,13 +18,15 @@ export default class Listado extends Component {
 							formulario.map((form, index) => (
 								<Datos
 									key={index}
+									onRemove={onRemove}
+									onEdit={onEdit}
 									form={form}
 								/>
 							))
 					)}
 				</div>
 				<div className="text-center">
-					<button type="button" onClick={setScreen} className="btn btn-info w-25">Ir a Formulario</button>
+					<button type="button" onClick={setScreen} className="btn btn-success w-25 mt-2">Ir a Formulario</button>
 				</div>
 			</>
 		)

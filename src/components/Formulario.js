@@ -3,6 +3,7 @@ import {Validaciones} from './Validaciones'
 export default class Formulario extends Component {
 
   state ={
+    id: '',
     email: '',
     age: 0,
     select: '',
@@ -12,14 +13,29 @@ export default class Formulario extends Component {
     alert: '',
   }   
 
+  componentDidMount () {
+    if(this.props.selectedData){
+      this.setState(this.props.selectedData)
+    }
+  }
+
   setForm = (event) => {
+    const {email, age, select, techs, descripcion, check, id} = this.state
     event.preventDefault()
     let error = Validaciones(this.state, this.setAlert)
     if(!error){
-      this.props.guardarForm(this.state) 
+      if(this.props.selectedData.length !== 0){
+        this.props.editarForm({id, email, age, select, techs, descripcion, check})
+        this.props.onEdit()
+      }else{
+        let id = Math.random().toString(16)
+        this.props.guardarForm({id, email, age, select, techs, descripcion, check}) 
+      }
+      
       this.props.setScreen()
     }
   }
+
   myChangeHandler = (event) => {
     let nam = event.target.name;
     let val = event.target.value;
@@ -52,6 +68,11 @@ export default class Formulario extends Component {
     this.setState({check})
   }
 
+  handleClick = () => {
+    this.props.setScreen()
+        this.props.onEdit()
+  }
+
 	render() {
     const {email, age, select, techs, descripcion, check, alert } = this.state
     
@@ -59,7 +80,7 @@ export default class Formulario extends Component {
 			<div className="container rounded-lg shadow col-md-7 col-sm-9 col-11 border pb-2">
         <div className="d-flex justify-content-between align-items-center mb-2">
           <h1 className="text-center ">FORMULARIO</h1>
-          <button type="button" onClick={this.props.setScreen} className="btn btn-info">Ver Listado</button>
+          <button type="button" onClick={this.handleClick} className="btn btn-info">Ver Listado</button>
         </div>
         <form onSubmit={this.setForm}>
           

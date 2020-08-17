@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
 
 export default class Datos extends Component {
+
+	handleDelete = () => {
+    this.props.onRemove(this.props.form)
+  }
+
+	handleUpdate = () => {
+    this.props.onEdit(this.props.form)
+  }
+
 	render() {
-		const {email, age, select, techs, descripcion } = this.props.form
+		const { email, age, select, techs, descripcion } = this.props.form
 		return (
 			<>
-				<div className="card m-1 rounded-lg shadow col-5" >
+				<div className="card m-1 rounded-lg shadow col-md-5 col-sm-10 " >
 					<div className="card-body">
 
-						<div className="d-flex flex-row  flex-wrap justify-content-between align-items-center">
+						<div className="d-flex flex-row flex-wrap justify-content-between align-items-center">
 							<h5 className="card-title">{email}</h5>
 							<h6 className="card-subtitle mb-2 text-muted">{age} años</h6>
 						</div>
@@ -32,6 +41,11 @@ export default class Datos extends Component {
 							<h6 className="font-weight-bold">Lenguaje:</h6>
 							<p className="mx-1 ">{select}</p>
 						</div>
+						<div className="d-flex justify-content-end">
+
+						<button type="button" onClick={this.handleUpdate} className="btn btn-info btn-sm mr-2">Editar</button>
+						<button type="button" onClick={this.handleDelete} className="btn btn-sm btn-danger">Eliminar</button>
+</div>
 
 					</div>
 				</div>
